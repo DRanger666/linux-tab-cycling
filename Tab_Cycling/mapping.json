@@ -1,0 +1,69 @@
+{
+    "_comment": "Application-specific tab navigation mappings",
+    "wm_class": {
+        "_comment": "Window class-based mappings (primary method)",
+        "firefox": {
+            "next": "ctrl+Tab",
+            "prev": "ctrl+shift+Tab",
+            "_comment": "Mozilla Firefox browser"
+        },
+        "google-chrome": {
+            "next": "ctrl+Tab",
+            "prev": "ctrl+shift+Tab",
+            "_comment": "Google Chrome browser"
+        },
+        "chromium": {
+            "next": "ctrl+Tab",
+            "prev": "ctrl+shift+Tab",
+            "_comment": "Chromium browser"
+        },
+        "code": {
+            "next": "ctrl+Page_Down",
+            "prev": "ctrl+Page_Up",
+            "_comment": "Visual Studio Code editor"
+        },
+        "gnome-terminal": {
+            "next": "ctrl+Page_Down",
+            "prev": "ctrl+Page_Up",
+            "_comment": "GNOME Terminal emulator"
+        },
+        "tilix": {
+            "next": "ctrl+Page_Down",
+            "prev": "ctrl+Page_Up",
+            "_comment": "Tilix terminal emulator"
+        },
+        "terminator": {
+            "next": "ctrl+Page_Down",
+            "prev": "ctrl+Page_Up",
+            "_comment": "Terminator terminal emulator"
+        },
+        "sublime_text": {
+            "next": "ctrl+Page_Down",
+            "prev": "ctrl+Page_Up",
+            "_comment": "Sublime Text editor"
+        }
+    },
+    "proc_name": {
+        "_comment": "Process name-based mappings (fallback method)",
+        "code": {
+            "next": "ctrl+Page_Down",
+            "prev": "ctrl+Page_Up",
+            "_comment": "Visual Studio Code (process name)"
+        },
+        "firefox": {
+            "next": "ctrl+Tab",
+            "prev": "ctrl+shift+Tab",
+            "_comment": "Firefox (process name)"
+        },
+        "chromium": {
+            "next": "ctrl+Tab",
+            "prev": "ctrl+shift+Tab",
+            "_comment": "Chromium (process name)"
+        }
+    },
+    "fallback": {
+        "next": "ctrl+Tab",
+        "prev": "ctrl+shift+Tab",
+        "_comment": "Default for unrecognized applications"
+    }
+}
