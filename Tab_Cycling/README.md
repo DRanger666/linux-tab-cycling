@@ -21,8 +21,7 @@ This solution allows you to use the same global keyboard shortcuts to cycle thro
 - [`config/mapping.json`](config/mapping.json) - Configuration file with application-specific key combinations
 - [`tests/test_script.sh`](tests/test_script.sh) - Helper script for easier testing without losing window focus
 - [`docs/test_instructions.md`](docs/test_instructions.md) - Detailed testing instructions
-- [`docs/deployment_plan.md`](docs/deployment_plan.md) - Step-by-step deployment guide
-- [`docs/create_linux_shortcut_plan.md`](docs/create_linux_shortcut_plan.md) - Original detailed implementation plan
+- [`docs/deployment_plan.md`](docs/deployment_plan.md) - Step-by-step deployment guide with technical details
 
 ## Quick Start
 

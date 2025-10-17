@@ -58,7 +58,42 @@ Choose one of two methods:
      Shortcut: Ctrl+Super+Left
 
 #### Method B: gsettings (Automatable)
-Use the gsettings commands from the original plan to register the shortcuts programmatically.
+Use the gsettings commands to register the shortcuts programmatically:
+
+```bash
+# paths
+p0="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+p1="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+
+# register list (append if already present)
+existing=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
+if [[ $existing == "@as []" ]]; then
+  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$p0','$p1']"
+else
+  # naive append if the paths are not already present
+  if [[ $existing != *"$p0"* ]]; then
+    new=${existing%]}
+    new="${new}, '$p0']"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "$new"
+  fi
+  if [[ $existing != *"$p1"* ]]; then
+    new=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
+    new=${new%]}
+    new="${new}, '$p1']"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "$new"
+  fi
+fi
+
+# set first binding
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$p0 name "Cycle tabs next"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$p0 command "/home/$USER/.local/bin/cycle-tabs.sh next"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$p0 binding "<Control><Super>Right"
+
+# set second binding
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$p1 name "Cycle tabs prev"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$p1 command "/home/$USER/.local/bin/cycle-tabs.sh prev"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$p1 binding "<Control><Super>Left"
+```
 
 ### 6. Final Testing
 After setting up the global shortcuts:
@@ -84,3 +119,27 @@ The Linux Tab Cycling Shortcut system is working correctly and ready for deploym
 - Identifies the application type
 - Sends the appropriate keystrokes for tab navigation
 - Works with different applications using their specific key combinations
+
+## Technical Details
+
+### How It Works
+The script:
+- Detects the focused window
+- Tries WM_CLASS then process name for identification
+- Looks up a JSON mapping to find the appropriate keystrokes
+- Sends the keystroke with xdotool using --clearmodifiers
+- Has a safe fallback for unrecognized applications
+
+### Script Notes
+- mapping.json is editable - add keys under "wm_class" using parts of WM_CLASS or under "proc_name" using process names from /proc/<pid>/comm
+- Use lowercase keys for reliability
+- xdotool's key names: use Page_Down, Page_Up, Tab, Return, etc.
+- `--clearmodifiers` avoids an active modifier stuck on interfering with the sent key
+- For debugging add `--debug` when running the script
+
+### Edge Cases and Tips
+- Some apps ignore synthetic events for security. If an app does that, you need an app-level solution (change its shortcuts or use an extension/remote API)
+- If you prefer consistent behavior across apps, configure the apps you use most to the same keyset (for example set browser and editor to use Ctrl+PageDown for next tab)
+- If a program uses MRU tab switching and you want linear switching, change the mapping (for example VS Code default MRU is ctrl+Tab; set mapping to ctrl+Page_Down for linear)
+- You can extend the JSON to include per-window-title patterns if needed
+- This works on X11 and GNOME session
