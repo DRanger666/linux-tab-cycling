@@ -3,9 +3,11 @@
 
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Get the parent directory (Tab_Cycling root)
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
 # Path to the cycle-tabs script
-CYCLE_SCRIPT="$SCRIPT_DIR/cycle-tabs.sh"
+CYCLE_SCRIPT="$ROOT_DIR/bin/cycle-tabs.sh"
 
 # Function to display usage
 usage() {

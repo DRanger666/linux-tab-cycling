@@ -24,7 +24,11 @@ if [[ -n $pid && -r /proc/$pid/comm ]]; then
   proc=$(tr -d '\n' < /proc/$pid/comm)
 fi
 
-config="$PWD/mapping.json"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Get the parent directory (Tab_Cycling root)
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+config="$ROOT_DIR/config/mapping.json"
 
 send_key() {
   keyseq="$1"
