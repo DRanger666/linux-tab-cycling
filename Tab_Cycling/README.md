@@ -17,11 +17,11 @@ This solution allows you to use the same global keyboard shortcuts to cycle thro
 
 ## Files
 
-- [`bin/cycle-tabs.sh`](bin/cycle-tabs.sh) - Main script that detects active window and sends appropriate keystrokes
-- [`config/mapping.json`](config/mapping.json) - Configuration file with application-specific key combinations
-- [`tests/test_script.sh`](tests/test_script.sh) - Helper script for easier testing without losing window focus
-- [`docs/test_instructions.md`](docs/test_instructions.md) - Detailed testing instructions
-- [`docs/deployment_plan.md`](docs/deployment_plan.md) - Step-by-step deployment guide with technical details
+- [`cycle-tabs.sh`](cycle-tabs.sh) - Main script that detects active window and sends appropriate keystrokes
+- [`mapping.json`](mapping.json) - Configuration file with application-specific key combinations
+- [`test_script.sh`](test_script.sh) - Helper script for easier testing without losing window focus
+- [`test_instructions.md`](test_instructions.md) - Detailed testing instructions
+- [`deployment_plan.md`](deployment_plan.md) - Step-by-step deployment guide with technical details
 
 ## Quick Start
 
@@ -34,23 +34,23 @@ This solution allows you to use the same global keyboard shortcuts to cycle thro
 2. Test the functionality:
    ```bash
    # Make scripts executable
-   chmod +x bin/cycle-tabs.sh tests/test_script.sh
+   chmod +x cycle-tabs.sh test_script.sh
    
    # Test with currently focused window
-   ./tests/test_script.sh next
+   ./test_script.sh next
    
    # Test with specific application
-   ./tests/test_script.sh next Firefox
+   ./test_script.sh next Firefox
    ```
 
 3. Deploy to system locations:
    ```bash
    mkdir -p ~/.config/cycle-tabs ~/.local/bin
-   cp config/mapping.json ~/.config/cycle-tabs/
-   cp bin/cycle-tabs.sh ~/.local/bin/
+   cp mapping.json ~/.config/cycle-tabs/
+   cp cycle-tabs.sh ~/.local/bin/
    
    # Update script to use correct config path
-   sed -i 's|$ROOT_DIR/config/mapping.json|$HOME/.config/cycle-tabs/mapping.json|' ~/.local/bin/cycle-tabs.sh
+   sed -i 's|config/mapping.json|$HOME/.config/cycle-tabs/mapping.json|' ~/.local/bin/cycle-tabs.sh
    ```
 
 4. Set up global shortcuts in GNOME:
@@ -72,7 +72,7 @@ This solution allows you to use the same global keyboard shortcuts to cycle thro
 
 ## Configuration
 
-To add support for additional applications, edit [`config/mapping.json`](config/mapping.json) and add entries under the appropriate section:
+To add support for additional applications, edit [`mapping.json`](mapping.json) and add entries under the appropriate section:
 
 ```json
 {

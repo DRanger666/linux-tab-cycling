@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 # Helper script to test the tab cycling functionality without losing focus
 
-# Get the directory where this script is located
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# Get the parent directory (Tab_Cycling root)
-ROOT_DIR="$(dirname "$SCRIPT_DIR")"
-
 # Path to the cycle-tabs script
-CYCLE_SCRIPT="$ROOT_DIR/bin/cycle-tabs.sh"
+CYCLE_SCRIPT="$(dirname "${BASH_SOURCE[0]}")/cycle-tabs.sh"
 
 # Function to display usage
 usage() {
